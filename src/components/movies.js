@@ -1,18 +1,8 @@
 import React, { Component } from "react";
-import { getMovies } from "../services/fakeMovieService";
 
 class Movies extends Component {
-  state = {
-    movies: getMovies()
-  };
-
-  handleDelete = movie => {
-    const movies = this.state.movies.filter(m => m._id !== movie._id);
-    this.setState({ movies });
-  };
-
   render() {
-    const { length: count } = this.state.movies;
+    const { length: count } = this.props.movies;
     if (count === 0) return <p>"There are no movies in the database"</p>;
 
     return (
@@ -26,18 +16,22 @@ class Movies extends Component {
               <th scope="col">Stock</th>
               <th scope="col">Rate</th>
               <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            {this.state.movies.map(movie => (
+            {this.props.movies.map(movie => (
               <tr key={movie._id}>
                 <td>{movie.title}</td>
                 <td>{movie.genre.name}</td>
                 <td>{movie.numberInStock}</td>
                 <td>{movie.dailyRentalRate}</td>
                 <td>
+                  <i class="fa fa-heart-o" aria-hidden="true"></i>
+                </td>
+                <td>
                   <button
-                    onClick={() => this.handleDelete(movie)}
+                    onClick={() => this.props.onDelete(movie)}
                     className="btn btn-danger btn-sm"
                   >
                     Delete
