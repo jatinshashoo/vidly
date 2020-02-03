@@ -24,7 +24,6 @@ class TableHeader extends Component {
               {column.label}
             </th>
           ))}
-          }
         </tr>
       </thead>
     );
