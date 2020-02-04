@@ -2,24 +2,23 @@ import React, { Component } from "react";
 import _ from "lodash";
 
 class TableBody extends Component {
-  renderCell = (item, column) => {
-    if (column.content) {
-      //console.log("---", item[column.content]);
-      //return item[column.content];
-      return column.content(item);
-    } else {
-      return _.get(item, column.path);
-    }
-  };
+  renderCell(item, column) {
+    if (column.content) return column.content(item);
+    return _.get(item, column.path);
+  }
+
+  createKey(item, column) {
+    return item.id + (column.path || column.key);
+  }
 
   render() {
-    const { data, columns } = this.props;
+    const { data, columns, idProperty } = this.props;
     return (
       <tbody>
         {data.map(item => (
-          <tr key={item._id}>
+          <tr key={item[idProperty]}>
             {columns.map(column => (
-              <td key={column.path || column.key}>
+              <td key={this.createKey(item, column)}>
                 {this.renderCell(item, column)}
               </td>
             ))}
@@ -29,5 +28,9 @@ class TableBody extends Component {
     );
   }
 }
+
+TableBody.defaultProps = {
+  idProperty: "_id"
+};
 
 export default TableBody;
