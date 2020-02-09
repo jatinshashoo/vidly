@@ -9,17 +9,30 @@ import MovieForm from "./components/movieForm";
 import LoginForm from "./components/loginForm";
 import { ToastContainer } from "react-toastify";
 import RegisterForm from "./components/registerForm";
+import jwtDecode from "jwt-decode";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
+  state = {};
+
+  componentDidMount() {
+    try {
+      const jwt = localStorage.getItem("token");
+      const user = jwtDecode(jwt);
+      this.setState({ user });
+    } catch (ex) {}
+  }
+
   render() {
     return (
       <React.Fragment>
         <ToastContainer />
-        <NavBar />
+        <NavBar user={this.state.user} />
         <main className="container">
           <Switch>
+            <Route path="/logout" component={RegisterForm}></Route>
+            <Route path="/profile" component={RegisterForm}></Route>
             <Route path="/register" component={RegisterForm}></Route>
             <Route path="/login" component={LoginForm}></Route>
             <Route path="/movies/:id" component={MovieForm}></Route>
