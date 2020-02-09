@@ -6,7 +6,7 @@ import ListGroup from "./common/listgroup";
 import { getGenres } from "../services/genreService";
 import MoviesTable from "./moviesTable";
 import _ from "lodash";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SearchBox from "./common/searchBox";
 import { toast } from "react-toastify";
 
