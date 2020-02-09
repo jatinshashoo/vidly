@@ -7,7 +7,7 @@ function init() {
 }
 
 function log(error) {
-  console.log("Error", error);
+  console.log("logService Error", error);
   //Sentry.captureException(error);
 }
 
