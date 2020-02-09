@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import jwtDecode from "jwt-decode";
 import Movies from "./components/movies";
 import Customers from "./components/customers";
 import Rentals from "./components/rentals";
@@ -7,9 +9,8 @@ import NotFound from "./components/notFound";
 import NavBar from "./components/navBar";
 import MovieForm from "./components/movieForm";
 import LoginForm from "./components/loginForm";
-import { ToastContainer } from "react-toastify";
 import RegisterForm from "./components/registerForm";
-import jwtDecode from "jwt-decode";
+import Logout from "./components/logout";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -31,8 +32,7 @@ class App extends Component {
         <NavBar user={this.state.user} />
         <main className="container">
           <Switch>
-            <Route path="/logout" component={RegisterForm}></Route>
-            <Route path="/profile" component={RegisterForm}></Route>
+            <Route path="/logout" component={Logout}></Route>
             <Route path="/register" component={RegisterForm}></Route>
             <Route path="/login" component={LoginForm}></Route>
             <Route path="/movies/:id" component={MovieForm}></Route>
